@@ -142,3 +142,28 @@ $\mathrm{rank} [\mathbf{\omega}]_\times^2
 
 所以对于 $\theta = \pi$, $\hat{\mathbf{\omega}} \in \mathrm{Ker} (R - I)$.
 不必担心出现多解.
+
+## 杂七杂八
+
+> $$R [\mathbf{\omega}]_\times R^T = [R \mathbf{\omega}]_\times$$
+
+首先, 不加证明地直接给出:
+对于三维空间中按右手排列的一组规范正交基 $\mathbf{e}_i$, $i = 1,2,3$,
+有 $\mathbf{e}_i \times \mathbf{e}_j = \varepsilon_{ijk} ~  \mathbf{e}_k$.
+
+$$\begin{align*}
+(R [\mathbf{\omega}]_\times R^T)_{ij} &= R_{im} ~ \varepsilon_{mkn} \omega_k ~ R_{jn} \\
+&= \varepsilon_{mkn} ~ (R_i)_m ~ \omega_k ~ (R_j)_n \\
+&= \mathbf{R}_i \cdot (\mathbf{\omega} \times \mathbf{R}_j) \\
+&= - \mathbf{\omega} \cdot (\mathbf{R}_i \times \mathbf{R}_j) \\
+&= - \mathbf{\omega} \cdot \varepsilon_{ijk} \mathbf{R}_k \\
+&= \varepsilon_{ikj} \mathbf{R}_k \cdot \mathbf{\omega} \\
+&= \varepsilon_{ikj} ~ R_{kn} \omega_n \\
+&= \varepsilon_{ikj} ~ (R \mathbf{\omega})_k \\
+&= ([R \mathbf{\omega}]_\times)_{ij}
+\end{align*}$$
+
+其中 $\mathbf{R_i}$ 表示 $R$ 的第 $i$ 个列向量.
+需要指出, 对于 $R \in SO(3)$, 因为 $\mathrm{det} R = 1$,
+所以列向量 $\mathbf{R_i}$, $i = 1,2,3$ 是以右手坐标排列的.
+这也是使用引理的必要条件.
