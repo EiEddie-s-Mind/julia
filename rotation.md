@@ -1,3 +1,10 @@
+---
+tags:
+  - 数学
+  - julia
+datetime: 2025-03-01
+---
+
 # 三维空间中旋转的描述
 
 三维空间中所有正交且行列式为 $1$ 的矩阵组成一个群, 称为 *特殊正交群* $SO(3)$,
@@ -88,6 +95,19 @@ R &= \mathrm{e}^{\theta [\hat{\mathbf{\omega}}]_\times} \\
   &= I + \sin{\theta} [\mathbf{\omega}]_\times + (1-\cos{\theta}) [\hat{\mathbf{\omega}}]_\times^2 \\
   &= \cos{\theta} I + (1-\cos{\theta}) \hat{\mathbf{\omega}} \hat{\mathbf{\omega}}^T + \sin{\theta} [\hat{\mathbf{\omega}}]_\times
 \end{align*}$$
+
+另外, 对于 $[\mathbf{\omega}]_\times = \theta [\hat{\mathbf{\omega}}]_\times$, 其中 $\hat{\mathbf{\omega}}$ 为单位向量,
+我们有办法直接从 $[\mathbf{\omega}]_\times$ 提取 $\theta$.
+
+注意到 $[\mathbf{\omega}]_\times^2 = \mathbf{\omega} \mathbf{\omega}^T - \|\mathbf{\omega}\|^2 I$, 两边取迹, 有
+$$\begin{align*}
+\mathrm{tr} [\mathbf{\omega}]_\times^2 &= \mathrm{tr} (\mathbf{\omega} \mathbf{\omega}^T - \|\mathbf{\omega}\|^2 I) \\
+&= \mathrm{tr} \mathbf{\omega}^T \mathbf{\omega} - \|\mathbf{\omega}\|^2 \mathrm{tr} I \\
+&= \|\mathbf{\omega}\|^2 - 3 \|\mathbf{\omega}\|^2 \\
+&= -2 \|\mathbf{\omega}\|^2
+\end{align*}$$
+
+如此, $\|\mathbf{\omega}\| = \sqrt{-\frac{1}{2} \mathrm{tr} [\mathbf{\omega}]_\times^2}$.
 <br/>
 
 
