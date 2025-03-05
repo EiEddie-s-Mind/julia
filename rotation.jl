@@ -1,9 +1,3 @@
-module rotation
-export log, Log, exp, Exp, ∨, ∧
-using LinearAlgebra
-# 使用定长向量与矩阵实现对 SO(3), SE(3) 元素的多重派发
-using StaticArrays
-
 """
 	∨: so(3) -> R^3
 """
@@ -32,7 +26,8 @@ end
 	exp: so(3) -> SO(3)
 """
 function Base.exp(Ω::SMatrix{3,3})
-	θ = sqrt(abs(tr(Ω^2)/2))
+	θ = sqrt(-tr(Ω^2)/2)
+	θ ≈ 0. && return SMatrix{3,3}(I)
 	Ω = Ω / θ
 	return I + sin(θ)*Ω + (1-cos(θ))*Ω^2
 end
@@ -48,7 +43,7 @@ rot(θ, ω::SVector{3}) = cos(θ)*I + (1 - cos(θ))*ω*ω' + sin(θ)*∧(ω)
 	Exp: R^3 -> SO(3)
 """
 #Exp(v::Vector) = exp(∧(v))
-Exp(v::SVector{3}) = rot(norm(v), normalize(v))
+Exp(v::SVector{3}) = norm(v) ≈ 0. ? SMatrix{3,3}(I) : rot(norm(v), normalize(v))
 
 """
 	Ad: SO(3) -> R^3×3
@@ -59,6 +54,3 @@ Exp(v::SVector{3}) = rot(norm(v), normalize(v))
 那么 ``R_b`` 切空间内表示的向量 ``ω_b = Ad(R_{ba}) ω_a``.
 """
 Ad(R::SMatrix{3,3}) = R
-
-
-end
