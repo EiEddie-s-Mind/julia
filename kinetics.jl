@@ -6,7 +6,7 @@ using StaticArrays
 
 include("rotation.jl")
 
-#export ⊕, unpack, normalize
-#include("movement.jl")
+export ⊕, unpack, normalize
+include("movement.jl")
 
 end
