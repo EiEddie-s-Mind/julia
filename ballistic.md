@@ -4,12 +4,14 @@ tags:
   - 数学
   - julia
 datetime: 2025-01-28
+title: 抛体运动弹道解算
+aliases: [抛体运动弹道解算]
 ---
 
 # 抛体运动弹道解算
 ## 模型
 本文考虑使用 [*线性阻力*](https://zh.wikipedia.org/wiki/阻力#雷諾數很低時的阻力) 模型.
-事实上, 在空气中运动的阻力应该由 [*二次阻力*](https://zh.wikipedia.org/wiki/阻力#高速時的阻力) 描述, 关于二者的对比将在[后文](#与二次阻力的对比)给出.
+事实上, 在空气中运动的阻力应该由 [*二次阻力*](https://zh.wikipedia.org/wiki/阻力#高速時的阻力) 描述, 关于二者的对比将在 [后文](#与二次阻力的对比) 给出.
 
 之所以使用线性阻力, 是因为如此一来物体的运动微分方程
 
@@ -26,9 +28,7 @@ $$\mathbf{v} = \mathrm{e}^{-\mu t} \mathbf{v}_0 - \mu^{-1} (1-\mathrm{e}^{-\mu t
 积分得
 
 $$
-\mathbf{r} = \mathbf{r}_0 - \mu^{-1} (1-\mathrm{e}^{-\mu t}) \mathbf{v}_0 - \mu^{-2} (\mu t + \mathrm{e}^{-\mu t} - 1) g \hat{\mathbf{j}}
-\tag{1.1}
-\label{model:movement}
+\mathbf{r} = \mathbf{r}_0 - \mu^{-1} (1-\mathrm{e}^{-\mu t}) \mathbf{v}_0 - \mu^{-2} (\mu t + \mathrm{e}^{-\mu t} - 1) g \, \hat{\mathbf{j}}
 $$
 
 这就是线性阻力情况下的运动方程. 它也可以很轻松地分解为两个方向来运算.
@@ -85,7 +85,7 @@ $$\begin{align*}
 可以看出线性阻力模型在 $x > 15 ~ \mathrm{m}$ 时才有显著的偏差.
 
 ## 轨迹方程
-将 $\eqref{model:movement}$ 中 $t$ 消去, 即为轨迹方程.
+将运动方程中 $t$ 消去, 即为轨迹方程.
 
 我们先将初速度 $\mathbf{v}_0$ 分解为 $v_0 ~ (\cos{\theta}, \sin{\theta})$, 而后在 $x$ 方向解出 $t$:
 
@@ -95,8 +95,6 @@ $$t = \mu^{-1} \ln{\frac{v_0 \cos{\theta}}{v_0 \cos{\theta} - \mu x}}$$
 
 $$
 y - \frac{g}{\mu^2 v_0} (\mu x \sec{\theta} - v_0 \ln{\frac{v_0}{v_0 - \mu x \sec{\theta}}}) - x \tan{\theta} = 0
-\tag{2.1}
-\label{track:equa}
 $$
 
 轨迹上的点 $(x, y)$ 都应满足于上面的方程, 这便是轨迹方程.
@@ -110,7 +108,7 @@ $$
 显而易见, 对于一般的目标, 抛体运动总有两条可达的轨迹. 一条是在上升时到达, 一条则在下降时.
 我们总是更喜欢上升时到达的情况, 因为这样运动的时间短, 且可以使用线性阻力模型更精确地模拟, 误差更小. 这就对初值的选取提出了要求.
 
-令 $\eqref{track:equa}$ 左边为目标函数 $f(\theta)$, 规定定义域为 $(-\frac{\pi}{2}, \frac{\pi}{2})$ 的子集,
+令轨迹方程左边为目标函数 $f(\theta)$, 规定定义域为 $(-\frac{\pi}{2}, \frac{\pi}{2})$ 的子集,
 作图观察 (曲线; $\mu = 0.01$, $v = 20 ~ \mathrm{m/s}$, $(x, y) = (5, 0.5)$):
 
 ![目标函数](figs/ballistic/target_func.png)
@@ -171,7 +169,7 @@ $$y = -\frac{g}{2 v_0^2} x^2 + \frac{v_0^2}{2 g}$$
 在实际计算中对于根号与分式要特别注意, 防止出现超出定义域的情况. 可以在计算前简要判断一下, 确保各函数的自变量都在其定义域内.
 
 ## 代码实现
-[代码由 `julia` 编写](ballistic.jl). Benchmark 显示其性能十分卓越:
+[代码](ballistic.jl)由 `julia` 编写. Benchmark 显示其性能十分卓越:
 ```
 #@benchmark θ([5.,0.5], 20., 9.8, 0.1, (-pi/6,pi/3))
 BenchmarkTools.Trial: 10000 samples with 223 evaluations per sample.

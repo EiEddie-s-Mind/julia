@@ -3,6 +3,8 @@ tags:
   - 数学
   - julia
 datetime: 2025-03-01
+title: 三维空间中旋转的描述
+aliases: [三维空间中旋转的描述]
 ---
 
 # 三维空间中旋转的描述
@@ -25,8 +27,8 @@ $$\begin{align*}
                                   &= \omega_i \omega_j - \delta_{ij} \omega_m \omega_m \\
                                   &= (\mathbf{\omega} \mathbf{\omega}^T - \|\mathbf{\omega}\|^2 I)_{ij}
 \end{align*}$$
-<br/>
 
+<br/>
 
 > $$[\mathbf{\omega}]_\times^3 = - \|\mathbf{\omega}\|^2 [\mathbf{\omega}]_\times$$
 
@@ -37,8 +39,8 @@ $$\begin{align*}
                            &= \mathbf{\omega} (\mathbf{\omega} \times \mathbf{\omega})^T - \|\mathbf{\omega}\|^2 [\mathbf{\omega}]_\times \\
                            &= - \|\mathbf{\omega}\|^2 [\mathbf{\omega}]_\times
 \end{align*}$$
-<br/>
 
+<br/>
 
 > $$\mathrm{rank} [\mathbf{\omega}]_\times = 2$$
 > 其中 $\mathbf{\omega} \in \mathbb{R}^3 \backslash \{0\}$.
@@ -74,8 +76,8 @@ $$\forall \mathbf{v} \in \mathbb{R}^3, \mathbf{\omega} \times \mathbf{v} = \math
 进而 $(\mathbf{\omega}^\wedge \mathbf{v})_i = (\varepsilon_{ijk} \omega_j) v_k$.
 于是 $(\mathbf{\omega}^\wedge)_{ik} = \varepsilon_{ijk} \omega_j$, 即
 $$(\mathbf{\omega}^\wedge)_{ij} = \varepsilon_{ikj} \omega_k$$
-<br/>
 
+<br/>
 
 > $$\begin{align*}
 > \mathrm{exp}: \mathfrak{so}(3)                      &\rightarrow  SO(3) \\
@@ -108,8 +110,8 @@ $$\begin{align*}
 \end{align*}$$
 
 如此, $\|\mathbf{\omega}\| = \sqrt{-\frac{1}{2} \mathrm{tr} [\mathbf{\omega}]_\times^2}$.
-<br/>
 
+<br/>
 
 > $$\begin{align*}
 > \mathrm{log}: SO(3) &\rightarrow  \mathfrak{so}(3) \\
